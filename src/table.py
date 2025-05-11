@@ -1,14 +1,12 @@
-PATH = 'C:\Python\PythonProjects\payout_task\data\data1.csv'
-
 
 def group(data: list) -> dict:
     #  группируем сотрудников по отделам
-    headers = data[0].split(',')
+    headers = data[0]
     departments = {}
 
     for line in data[1:]:
         if len(line) > 1:
-            values = line.split(',')
+            values = line
             employees = dict(zip(headers, values))
 
             department_name = employees['department']
@@ -22,7 +20,7 @@ def get_keys(data: list) -> str:
     #  обрабатываем варианты ключа rate
     headers = {'id': '', 'email': '', 'name': '', 'department': '', 'hours_worked': '', 'rate': ''}
 
-    for i in data[0].split(','):
+    for i in data:
         if i in headers:
             headers[i] = i
         else:
@@ -53,12 +51,4 @@ def printing(departments: dict, key: str):
             (str(sum(total_hours)).rjust(37)),
             (str(sum(total_cash)).rjust(25))
             )
-
-
-if __name__ == '__main__':
-    with open(PATH, 'r') as file:
-        data = file.read().split('\n')
-
-        key = get_keys(data)
-        employees = group(data)
-        printing(employees, key)
+    print(''.rjust(70, '-'))

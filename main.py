@@ -1,28 +1,15 @@
-import os
+from src.cmd import parse_input
+from src.table import group, get_keys, printing
 
-from read import is_csv_file, read_csv_file
 
+data = parse_input()
 
-def main():
-    while True:
-        file_path = input('Please, input path for CSV file: ')
-
-        if not os.path.isfile(file_path):
-            print('File defined. Enter correct path. ')
-            continue
-
-        if not is_csv_file(file_path):
-            print('This file not CSV.')
-            continue
-
-        data = read_csv_file(file_path)
-
-        if data is not None:
-            print('Data:')
-            for row in data:
-                print(row)
-            break
+def main(data):
+    for file in data:
+        key = get_keys(file[0])
+        employees = group(file)
+        printing(employees, key)
 
 
 if __name__ == "__main__":
-    main()
+    main(data)
