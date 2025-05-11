@@ -1,0 +1,1 @@
+file_path = 'C:\\Users\sales3-suzuki\Desktop\PycharmProjects\payout_task\data\data1.csv'
