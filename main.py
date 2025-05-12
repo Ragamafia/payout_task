@@ -1,14 +1,14 @@
 from src.cmd import parse_input
-from src.table import group, get_keys, printing
+from src.view import group, get_keys, display
 
 
 data = parse_input()
 
-def main(data):
+def main(data: list):
     for file in data:
-        key = get_keys(file[0])
+        headers = get_keys(file[0])
         employees = group(file)
-        printing(employees, key)
+        display(employees, headers['rate'])
 
 
 if __name__ == "__main__":
