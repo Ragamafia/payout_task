@@ -16,23 +16,18 @@ def group(data: list) -> dict:
     return departments
 
 def get_keys(data: list) -> dict:
-    #  обрабатываем варианты разных названий колонок в файле
+    #  обрабатываем варианты разных названий колонки rate
     headers = {'id': '', 'email': '', 'name': '', 'department': '', 'hours_worked': '', 'rate': ''}
 
     for i in data:
         if i in headers:
             headers[i] = i
         else:
-            headers['id'] = i
-            headers['email'] = i
-            headers['name'] = i
-            headers['department'] = i
-            headers['hours_worked'] = i
             headers['rate'] = i
 
     return headers
 
-def display(departments: dict, key: str):
+def payout_report(departments: dict, key: str):
     print(f"{'name':>19} {'hours':>18} {'rate':>10} {'payout':>13}")
 
     for dep, info in departments.items():
