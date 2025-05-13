@@ -18,41 +18,34 @@ class ReportModule:
     type: str
     name: str
 
-    def print_report(self, employers: list[Employer], json: bool = False):
-        ...
-
 
 class PayoutReportModule(ReportModule):
     type: str = "payout"
     name: str = "Отчет по зарплате"
 
-    def print_report(self, files: list[Employer], json: bool = False):
+    def print_report(self, files: list[Employer]):
         print(f"{'name':>19} {'hours':>18} {'rate':>10} {'payout':>13}")
         departments = []
-        total_cash = []
-        total_hours = []
+        total_cash = 0
+        total_hours = 0
 
         for employee in files:
-
             if employee.department not in departments:
                 departments.append(employee.department)
                 print(employee.department)
 
             cash = int(employee.rate) * int(employee.hours_worked)
-
             print(f"{' ':->14}",
                   f"{employee.name:<18}",
                   f"{employee.hours_worked:<12}",
                   f"{employee.rate:<10}",
-                  f"${str(cash):<10}"
+                  f"${cash:<10}"
                   )
 
-            total_cash.append(cash)
-            total_hours.append(int(employee.hours_worked))
+            total_cash += cash
+            total_hours+= int(employee.hours_worked)
 
-        print(f"{str(sum(total_hours)):>37}",
-              f"{'$' + str(sum(total_cash)):>25}"
-              )
+        print(f"{total_hours:>37}{'$':>22}{total_cash:<7}")
         print(f"{'':->65}")
 
 
@@ -153,7 +146,6 @@ class ReportBuilder:
 
                 employer = Employer(**validated)
                 employers.append(employer)
-                #return employer
 
         return employers
 
