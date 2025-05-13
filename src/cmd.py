@@ -80,16 +80,17 @@ class ReportBuilder:
             'paths',
             nargs='*',
             metavar='PATHS',
-            help="Один или несколько путей к файлам или папкам. "
-                 "Скрипт определит их тип."
+            help="Один или несколько путей к файлам и/или папкам. "
+                 "Скрипт сам находит файлы с форматом CSV. "
         )
+
         parser.add_argument('--report',
                             type=str,
                             default=cfg.DEFAULT_REPORT_TYPE,
                             help=f'Выбор типа отчета: например {modules_string}')
         parser.add_argument('--json',
                             action='store_true',
-                            help='Выводить отчет в формате JSON')
+                            help='Выводить отчет в формате JSON (в разработке)')
         parser.add_argument('--recursive',
                             action='store_true',
                             default=cfg.DEFAULT_RECURSIVE,
